@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manajemen Booking - Padel Society</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e1ec",
+                        "background": "#fbf8ff",
+                        "surface-container": "#eeedf7",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary-fixed": "#c3f400",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fbf8ff",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-container-low": "#f4f2fd",
+                        "surface-container-high": "#e8e7f1",
+                        "on-surface": "#1a1b22",
+                        "inverse-primary": "#abd600",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed-dim": "#abd600",
+                        "tertiary-fixed": "#e2e2e3",
+                        "tertiary-container": "#ededee",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1a1b22",
+                        "inverse-surface": "#2f3038",
+                        "on-tertiary-container": "#696b6c",
+                        "primary-container": "#ccff00",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dad9e3",
+                        "primary": "#506600",
+                        "secondary-container": "#e5e2e1",
+                        "surface-container-highest": "#e3e1ec",
+                        "outline-variant": "#c4c9ac",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#5b7300",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf8ff",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "outline": "#747a60",
+                        "on-secondary-container": "#656464",
+                        "on-surface-variant": "#444933",
+                        "surface-tint": "#506600",
+                        "tertiary": "#5d5e60",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "on-secondary-fixed-variant": "#474646",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1effa",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "on-primary-fixed": "#161e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit-sm": "8px",
+                        "unit-md": "16px",
+                        "unit-lg": "32px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit-xl": "64px",
+                        "margin-mobile": "20px",
+                        "unit-xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                },
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md text-body-md flex min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface bg-surface/70 backdrop-blur-xl border-r border-outline-variant/10 shadow-[40px_0_40px_rgba(0,0,0,0.04)] z-50 flex-col h-full p-unit-md">
+<div class="mb-unit-lg flex items-center gap-3">
+<img alt="Padel Society Admin" class="w-10 h-10 rounded-lg object-cover" data-alt="A minimalist, premium logo for a modern sports club featuring a stylized padel racket in black and sharp vibrant lime green. The logo should sit on a pristine white background with soft studio lighting reflecting the elite, fast-paced nature of the sport." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkCobQCHS7z8Fv7CM_wruIqDbLjz_x-prwY5Vr9q6OsftlfEVPCmN_fVOPBuSQV_I1fKczjOO2jJCdkBHKHb7i2aj5E3iJZkAxfLZtyFQ9w6ZtKI3cQQhHTsUIzrLG_UuRn7U6mlzW_RK-650VqEggdKsuuxXEAsY4lM4NsVW6DYz9G2u5hG7GRIufrm9kFPJd6B2f0Ih7HM-omLLEgAHtbGvuzMgaw3asMKKTAQ7afmHNdzlgv1mAgVlHh3IJb1uhRe5mB0qkygI"/>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Padel Society</h1>
+<p class="font-caption text-caption text-secondary">Admin Console</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-unit-xs">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-xl font-bold transition-all active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">sports_tennis</span>
+<span class="font-label-md text-label-md">Court Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-unit-md">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md font-bold hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                New Booking
+            </button>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="hidden md:flex fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm flex justify-between items-center h-16 px-unit-lg ml-64">
+<div class="flex-1 flex items-center">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low text-on-surface rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary border-none font-body-md text-body-md" placeholder="Search bookings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-unit-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer transition-all active:opacity-70 p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer transition-all active:opacity-70 p-2 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<button class="flex items-center gap-2 cursor-pointer transition-all active:opacity-70">
+<img alt="Admin User Profile" class="w-8 h-8 rounded-full object-cover" data-alt="A high quality, professional portrait photograph of a young asian male sports club administrator. He is wearing a clean white polo shirt, smiling confidently. Natural, soft daylighting with a slightly blurred modern office background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeT9VAgyV5kUI4ASQAKvUjcnKXqVx0mhJrUHgfVvkoudiJNqqv2IYdgB7UkWDMC-FLo5ADra-MrO64C6khxwEqm9R-mHrJJ6R2l1vul41UxKiDoJQR_NmL0giJHEOT7AoL4sdQM35cwKNQl3AQGIZHLJdxrukBM_HS807FeKB9fIEDO8XzmtgR8-j2JPOm2eFhnyGwXICEfemhLM26zjxk4cZXINr66Y_GVKyENMD7z8TYdtJrMQPdiBFBIA8v8AejYIo-6oT02jE"/>
+<span class="material-symbols-outlined text-on-surface-variant">keyboard_arrow_down</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 pt-[calc(64px+32px)] px-margin-mobile md:px-margin-desktop pb-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-unit-xl">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold text-on-background tracking-tight">Manajemen Booking</h2>
+<p class="font-body-md text-body-md text-secondary mt-1">Kelola dan pantau semua jadwal lapangan Padel Society.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label-md text-label-md font-bold flex items-center gap-2 hover:bg-primary/90 transition-all hover:shadow-lg hover:-translate-y-0.5 active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                Tambah Booking Baru
+            </button>
+</div>
+<!-- Filters & Data Table Container -->
+<div class="bg-surface-container-lowest rounded-3xl p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.02)] border border-outline-variant/20">
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-4 mb-unit-lg">
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md bg-transparent" placeholder="Cari nama, ID booking..." type="text"/>
+</div>
+<div class="relative min-w-[180px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">calendar_today</span>
+<select class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl py-2.5 pl-10 pr-8 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md appearance-none cursor-pointer bg-transparent">
+<option>Hari Ini</option>
+<option>Besok</option>
+<option>7 Hari Terakhir</option>
+<option>Bulan Ini</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative min-w-[160px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">sports_tennis</span>
+<select class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl py-2.5 pl-10 pr-8 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary font-body-md text-body-md appearance-none cursor-pointer bg-transparent">
+<option>Semua Lapangan</option>
+<option>Court 1 (Indoor)</option>
+<option>Court 2 (Indoor)</option>
+<option>Court 3 (Outdoor)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Status Tabs -->
+<div class="flex gap-2 border-b border-outline-variant/20 mb-6 overflow-x-auto no-scrollbar">
+<button class="px-4 py-2 font-label-md text-label-md font-bold text-primary border-b-2 border-primary whitespace-nowrap">Semua Booking</button>
+<button class="px-4 py-2 font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Terkonfirmasi</button>
+<button class="px-4 py-2 font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Menunggu Pembayaran</button>
+<button class="px-4 py-2 font-label-md text-label-md text-secondary hover:text-primary transition-colors whitespace-nowrap">Dibatalkan</button>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-outline-variant/20">
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold">ID</th>
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold">Pelanggan</th>
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold">Lapangan</th>
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold">Jadwal</th>
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold">Status Pembayaran</th>
+<th class="py-4 px-4 font-label-md text-label-md text-on-surface-variant font-semibold text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md font-mono text-secondary">#BK-0921</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-sm">AR</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Arya Dananjaya</div>
+<div class="font-caption text-caption text-secondary">0812-3456-7890</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Court 1 (Indoor)</td>
+<td class="py-4 px-4">
+<div class="font-body-md text-body-md text-on-surface">15 Okt 2023</div>
+<div class="font-caption text-caption text-secondary">16:00 - 18:00 WIB</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container/20 text-on-primary-container font-label-md text-label-md text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                    Lunas
+                                </span>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md font-mono text-secondary">#BK-0922</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-sm">BK</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Budi Kusuma</div>
+<div class="font-caption text-caption text-secondary">0813-9876-5432</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Court 3 (Outdoor)</td>
+<td class="py-4 px-4">
+<div class="font-body-md text-body-md text-on-surface">15 Okt 2023</div>
+<div class="font-caption text-caption text-secondary">19:00 - 21:00 WIB</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fff4e5] text-[#b36b00] font-label-md text-label-md text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#ff9800]"></span>
+                                    Pending DP
+                                </span>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4 font-body-md text-body-md font-mono text-secondary">#BK-0923</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold text-sm">CS</div>
+<div>
+<div class="font-body-md text-body-md font-medium text-on-surface">Citra Sari</div>
+<div class="font-caption text-caption text-secondary">0856-1122-3344</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Court 2 (Indoor)</td>
+<td class="py-4 px-4">
+<div class="font-body-md text-body-md text-on-surface">16 Okt 2023</div>
+<div class="font-caption text-caption text-secondary">07:00 - 09:00 WIB</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md text-[12px]">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                    Batal
+                                </span>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-outline-variant/20 pt-6 mt-4">
+<p class="font-caption text-caption text-secondary">Menampilkan 1-10 dari 45 booking</p>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant/30 rounded-lg text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 border border-primary bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 border border-outline-variant/30 text-on-surface hover:bg-surface-container-low rounded-lg font-label-md text-label-md flex items-center justify-center">2</button>
+<button class="w-8 h-8 border border-outline-variant/30 text-on-surface hover:bg-surface-container-low rounded-lg font-label-md text-label-md flex items-center justify-center">3</button>
+<button class="p-2 border border-outline-variant/30 rounded-lg text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

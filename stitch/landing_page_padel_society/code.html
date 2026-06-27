@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Padel Society - Revolusi Padel di Indonesia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f4f2fd",
+                    "secondary": "#5f5e5e",
+                    "on-primary": "#ffffff",
+                    "on-background": "#1a1b22",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#e5e2e1",
+                    "surface": "#fbf8ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "surface-container-highest": "#e3e1ec",
+                    "on-primary-container": "#5b7300",
+                    "on-tertiary-fixed": "#1a1c1d",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e8e7f1",
+                    "outline": "#747a60",
+                    "surface-tint": "#506600",
+                    "surface-dim": "#dad9e3",
+                    "surface-bright": "#fbf8ff",
+                    "tertiary-fixed": "#e2e2e3",
+                    "inverse-surface": "#2f3038",
+                    "background": "#fbf8ff",
+                    "on-primary-fixed": "#161e00",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "primary": "#506600",
+                    "primary-fixed-dim": "#abd600",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-surface": "#1a1b22",
+                    "on-surface-variant": "#444933",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#ededee",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#c3f400",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#f1effa",
+                    "surface-variant": "#e3e1ec",
+                    "on-primary-fixed-variant": "#3c4d00",
+                    "tertiary": "#5d5e60",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c4c9ac",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-container": "#696b6c",
+                    "on-secondary-container": "#656464",
+                    "inverse-primary": "#abd600",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface-container": "#eeedf7",
+                    "primary-container": "#ccff00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "3xl": "1.5rem"
+            },
+            "spacing": {
+                    "unit-sm": "8px",
+                    "unit-xl": "64px",
+                    "margin-desktop": "64px",
+                    "container-max": "1280px",
+                    "margin-mobile": "20px",
+                    "unit-xs": "4px",
+                    "unit-md": "16px",
+                    "unit-lg": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-md": ["Space Grotesk"],
+                    "headline-lg": ["Space Grotesk"],
+                    "caption": ["Inter"],
+                    "display-lg": ["Space Grotesk"],
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Space Grotesk"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-4 z-50 flex justify-between items-center px-unit-lg py-unit-sm w-[90%] mx-auto bg-surface/70 dark:bg-surface-dim/70 backdrop-blur-xl border border-on-surface/5 shadow-xl shadow-on-background/5 rounded-full max-w-[1280px]">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-primary-fixed">Padel Society</div>
+<div class="hidden md:flex space-x-gutter">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md hover:scale-[1.02] transition-transform duration-200 active:scale-95" href="#">Beranda</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md hover:scale-[1.02] active:scale-95" href="#">Lapangan</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md hover:scale-[1.02] active:scale-95" href="#">Membership</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md hover:scale-[1.02] active:scale-95" href="#">Event</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-body-md text-body-md hover:scale-[1.02] active:scale-95" href="#">Blog</a>
+</div>
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md px-6 py-3 rounded-full hover:bg-primary hover:text-on-primary transition-colors duration-300 hidden md:block">
+            Booking Sekarang
+        </button>
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop overflow-hidden">
+<!-- 1. Hero Section -->
+<section class="min-h-[819px] flex flex-col md:flex-row items-center justify-between py-unit-xl gap-unit-xl">
+<div class="flex-1 space-y-8 z-10">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">
+                    Revolusi Padel<br/>di Indonesia
+                </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-lg">
+                    Booking lapangan kelas dunia dalam hitungan detik. Gabung dengan komunitas padel paling elit.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-full hover:shadow-[0_8px_30px_rgb(80,102,0,0.3)] transition-all hover:-translate-y-1">
+                        Booking Sekarang
+                    </button>
+<button class="bg-transparent border border-outline text-on-surface font-label-md text-label-md px-8 py-4 rounded-full hover:bg-surface-variant transition-colors">
+                        Lihat Lapangan
+                    </button>
+</div>
+</div>
+<div class="flex-1 relative w-full h-[400px] md:h-[600px]">
+<img class="w-full h-full object-contain drop-shadow-2xl" data-alt="A highly detailed, ultra-realistic 3D illustration of a modern padel racket and glowing ball suspended in mid-air against a pristine white background. The style is sleek, minimalist, and premium, utilizing a color palette of crisp whites, subtle light grays, and energetic, vibrant padel green accents. The lighting is soft studio lighting, creating gentle ambient shadows and highlighting the high-end textures of the equipment. The overall mood is athletic, modern, and elite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQBw_rL3yTLcJumr7K4bA0B-zXNoljpRaHjfVdyEUFLQM97mt-NGu5PkcGJMbrSDgAFAaHd009wRvOADCTJG1EdH96LBwmHKeC6zxZF-8fKUWUQhVpJiclhnH_71YpFVC3j_lOubxWk5aUbmfnJDJn9VjeiFDdt28d2ippgZmGuGw7AYG58YHdqPityPwz_qTMNNfbM-O75-2aAfTCJAfJfYLk3A7bO-EzmUKR_LCMoLibkiwlGQ8ZQc3hwO-Omc3xtizSb_TtGRY"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-surface-dim full-width pt-unit-xl pb-unit-lg border-t border-outline-variant mt-unit-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Padel Society</div>
+<p class="text-secondary-fixed-variant dark:text-on-tertiary-fixed-variant font-body-md text-body-md">
+                    © 2024 Padel Society. All rights reserved.
+                </p>
+</div>
+<div class="space-y-2">
+<a class="block text-secondary-fixed-variant dark:text-on-tertiary-fixed-variant hover:text-primary hover:underline transition-all font-body-md text-body-md" href="#">About</a>
+</div>
+<div class="space-y-2">
+<a class="block text-secondary-fixed-variant dark:text-on-tertiary-fixed-variant hover:text-primary hover:underline transition-all font-body-md text-body-md" href="#">Quick Links</a>
+</div>
+<div class="space-y-2">
+<a class="block text-secondary-fixed-variant dark:text-on-tertiary-fixed-variant hover:text-primary hover:underline transition-all font-body-md text-body-md" href="#">Support</a>
+<a class="block text-secondary-fixed-variant dark:text-on-tertiary-fixed-variant hover:text-primary hover:underline transition-all font-body-md text-body-md" href="#">Social</a>
+</div>
+</div>
+</footer>
+</body></html>

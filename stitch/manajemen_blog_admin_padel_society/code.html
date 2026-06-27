@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Manajemen Blog - Padel Society</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2f3038",
+                        "error": "#ba1a1a",
+                        "primary-container": "#ccff00",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "inverse-primary": "#abd600",
+                        "surface-container": "#eeedf7",
+                        "primary": "#506600",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#abd600",
+                        "surface-tint": "#506600",
+                        "surface-container-high": "#e8e7f1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "outline-variant": "#c4c9ac",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-background": "#1a1b22",
+                        "surface": "#fbf8ff",
+                        "background": "#fbf8ff",
+                        "on-primary-container": "#5b7300",
+                        "surface-variant": "#e3e1ec",
+                        "on-surface-variant": "#444933",
+                        "on-secondary-fixed-variant": "#474646",
+                        "outline": "#747a60",
+                        "surface-container-highest": "#e3e1ec",
+                        "tertiary-container": "#ededee",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dad9e3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "tertiary": "#5d5e60",
+                        "secondary-container": "#e5e2e1",
+                        "on-tertiary-container": "#696b6c",
+                        "primary-fixed": "#c3f400",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#656464",
+                        "tertiary-fixed": "#e2e2e3",
+                        "on-primary-fixed": "#161e00",
+                        "inverse-on-surface": "#f1effa",
+                        "surface-container-low": "#f4f2fd",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-surface": "#1a1b22",
+                        "surface-bright": "#fbf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit-sm": "8px",
+                        "unit-md": "16px",
+                        "unit-xl": "64px",
+                        "margin-mobile": "20px",
+                        "unit-xs": "4px",
+                        "unit-lg": "32px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-md": ["Inter"],
+                        "caption": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .font-headline-lg { font-family: 'Space Grotesk', sans-serif; font-size: 32px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 600; }
+        .text-headline-lg { font-size: 32px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 600; }
+        .font-body-md { font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; font-weight: 400; }
+        .text-body-md { font-size: 16px; line-height: 1.6; font-weight: 400; }
+        .font-body-lg { font-family: 'Inter', sans-serif; font-size: 18px; line-height: 1.6; font-weight: 400; }
+        .text-body-lg { font-size: 18px; line-height: 1.6; font-weight: 400; }
+        .font-display-lg-mobile { font-family: 'Space Grotesk', sans-serif; font-size: 40px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        .text-display-lg-mobile { font-size: 40px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; }
+        .font-display-lg { font-family: 'Space Grotesk', sans-serif; font-size: 64px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+        .text-display-lg { font-size: 64px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+        .font-headline-md { font-family: 'Space Grotesk', sans-serif; font-size: 24px; line-height: 1.4; font-weight: 600; }
+        .text-headline-md { font-size: 24px; line-height: 1.4; font-weight: 600; }
+        .font-label-md { font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.2; letter-spacing: 0.05em; font-weight: 600; }
+        .text-label-md { font-size: 14px; line-height: 1.2; letter-spacing: 0.05em; font-weight: 600; }
+        .font-caption { font-family: 'Inter', sans-serif; font-size: 12px; line-height: 1.4; font-weight: 400; }
+        .text-caption { font-size: 12px; line-height: 1.4; font-weight: 400; }
+
+        /* Custom Scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e3e1ec;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c6c6c7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex">
+<!-- Sidebar Component (Shared) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface/70 backdrop-blur-xl border-r border-outline-variant/10 shadow-[40px_0_40px_rgba(0,0,0,0.04)] z-50">
+<div class="flex flex-col h-full p-unit-md">
+<!-- Brand Logo Area -->
+<div class="mb-unit-lg px-2">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Padel Society</h1>
+<p class="font-caption text-caption text-secondary mt-1">Admin Console</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+                    Bookings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sports_tennis</span>
+                    Court Management
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-xl font-bold transition-all font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">article</span>
+                    Blog
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+                    Analytics
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+                    Customers
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary hover:text-primary transition-colors hover:bg-surface-container-high rounded-xl font-label-md text-label-md active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+                    Settings
+                </a>
+</nav>
+<!-- User Profile / Bottom CTA -->
+<div class="mt-auto pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+<img alt="Padel Society Admin" class="w-full h-full object-cover" data-alt="A professional headshot of an administrator for a premium sports club, wearing clean modern activewear, soft natural lighting, high-end minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrg2E6ps0dF0Rz2k7wGzV3f-PlBoETy-pdoLZGR6gxczIwBSQN3yKW6DdSbSe4horp3K3-Qbb0GrH_9_JPuZ5dPwelBehRf3G0_ioSoFbbrn-O0sW8UIdrLKilY-qIV8sSckxvnovSOdAIhEa2roSshSG3p7BGOyrKvto-LGNTk5i8WsSZCtcFmfKkw3xL8rByHlYI3eCK-LHKFnD7xIXvQ2mozmlDl-z6n7vx6uM7D6093iMr33D7dEOyo7WAea5NanWoTVBVp78"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-md text-label-md truncate">Admin User</p>
+<p class="font-caption text-caption text-secondary truncate">admin@padelsociety.com</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- Top App Bar -->
+<header class="h-16 px-margin-desktop flex items-center justify-between bg-surface/70 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm sticky top-0 z-40">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">Manajemen Blog</h2>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors hover:bg-surface-container-high">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary-container text-on-primary-container font-label-md text-label-md px-6 py-2 rounded-full font-bold flex items-center gap-2 hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Buat Artikel Baru
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-margin-desktop max-w-container-max mx-auto w-full space-y-unit-xl">
+<!-- Statistics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-unit-md">
+<div class="bg-surface-container-low rounded-3xl p-unit-lg border border-outline-variant/10 shadow-[20px_20px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-secondary">Total Artikel</p>
+<span class="material-symbols-outlined text-primary bg-primary-container/30 p-2 rounded-full">article</span>
+</div>
+<p class="font-headline-lg text-headline-lg font-bold">124</p>
+<p class="font-caption text-caption text-primary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12 bulan ini
+                    </p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-unit-lg border border-outline-variant/10 shadow-[20px_20px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-secondary">Total Views</p>
+<span class="material-symbols-outlined text-primary bg-primary-container/30 p-2 rounded-full">visibility</span>
+</div>
+<p class="font-headline-lg text-headline-lg font-bold">45.2k</p>
+<p class="font-caption text-caption text-primary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +18% dari bulan lalu
+                    </p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-unit-lg border border-outline-variant/10 shadow-[20px_20px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-secondary">Rata-rata Baca</p>
+<span class="material-symbols-outlined text-primary bg-primary-container/30 p-2 rounded-full">timer</span>
+</div>
+<p class="font-headline-lg text-headline-lg font-bold">3m 42s</p>
+<p class="font-caption text-caption text-secondary mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">remove</span> Stabil
+                    </p>
+</div>
+<div class="bg-surface-container-low rounded-3xl p-unit-lg border border-outline-variant/10 shadow-[20px_20px_40px_rgba(0,0,0,0.02)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-md text-label-md text-secondary">Artikel Populer</p>
+<span class="material-symbols-outlined text-primary bg-primary-container/30 p-2 rounded-full">local_fire_department</span>
+</div>
+<p class="font-body-md text-body-md font-bold text-on-surface truncate">Teknik Dasar Padel untuk Pemula</p>
+<p class="font-caption text-caption text-secondary mt-2">12.4k views</p>
+</div>
+</section>
+<!-- Main Content Area: Filters and List -->
+<section class="bg-surface-container-lowest rounded-3xl p-unit-lg shadow-[40px_40px_80px_rgba(0,0,0,0.03)] border border-outline-variant/10">
+<!-- Filters -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
+<!-- Search -->
+<div class="relative w-full lg:w-96">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-none rounded-xl font-body-md text-body-md focus:ring-1 focus:ring-primary focus:bg-surface transition-colors" placeholder="Cari artikel..." type="text"/>
+</div>
+<!-- Category & Status Filters -->
+<div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md transition-colors border border-transparent">Semua</button>
+<button class="px-4 py-2 bg-surface text-secondary hover:bg-surface-container-high rounded-full font-label-md text-label-md transition-colors border border-outline-variant/20">Tips</button>
+<button class="px-4 py-2 bg-surface text-secondary hover:bg-surface-container-high rounded-full font-label-md text-label-md transition-colors border border-outline-variant/20">Berita</button>
+<button class="px-4 py-2 bg-surface text-secondary hover:bg-surface-container-high rounded-full font-label-md text-label-md transition-colors border border-outline-variant/20">Event</button>
+</div>
+<div class="h-6 w-px bg-outline-variant/30 hidden lg:block"></div>
+<select class="bg-surface text-secondary border border-outline-variant/20 rounded-xl px-4 py-2 font-label-md text-label-md focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Semua Status</option>
+<option>Published</option>
+<option>Draft</option>
+<option>Scheduled</option>
+</select>
+</div>
+</div>
+<!-- Articles Table/List -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20">
+<th class="py-4 px-4 font-label-md text-label-md text-secondary font-normal w-2/5">Judul Artikel</th>
+<th class="py-4 px-4 font-label-md text-label-md text-secondary font-normal">Kategori</th>
+<th class="py-4 px-4 font-label-md text-label-md text-secondary font-normal">Tanggal</th>
+<th class="py-4 px-4 font-label-md text-label-md text-secondary font-normal">Status</th>
+<th class="py-4 px-4 font-label-md text-label-md text-secondary font-normal text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Item 1 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up of a premium padel racket hitting a yellow ball, dynamic action shot, clean white court background, bright studio lighting, modern sports photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAapP7TAP4iQs9IR3vxr_ZrGe4yIU2FExshQ20P33s3X6hg_PjZHN8XOeChYhyPrCbxsMZuGZirxKlMKbYiQ_jGlJ9BeoA_HK56_RtJ_8Jlm4l4XNRF0XyAuEzBRgJuU64d7a2bxLq8YYsQ6u8Ru3sSJ1qeT8fMNNg4d7Kk5aby8YYCiHW84MUYljNiLXuFFKwDsdg7oUG2vWJIrzQJjgirm6v9y5Al4Ivs0NQay_J3EdJmaFuJn3kXkDC4_OWaK1bZHqR2GhjeV6A"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">Teknik Dasar Padel untuk Pemula</p>
+<p class="font-caption text-caption text-secondary mt-1">Oleh Sarah Wijaya</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-md font-caption text-caption">Tips</span>
+</td>
+<td class="py-4 px-4">
+<p class="font-body-md text-body-md text-on-surface">12 Okt 2023</p>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-container/20 text-on-primary-container rounded-full font-caption text-caption font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Published
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="View">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-error hover:bg-error-container/50 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 2 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A vibrant outdoor padel tournament scene in Indonesia, sunset lighting, players celebrating, modern club architecture in the background, energetic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWcjWhySoM1kG9EpC7yHmFnZCBX87Rtdse7uJeBh-hMUwst3palWGYroaNtNCQiqoEyqdYaJuL7RmmTFOC-qHtnKJADEPsnugHq36hd6DpWffnt3Ktw0WHm9ws5ldNI1FG9Z07UDzFXk3OaynRuuVlpImFxNWrqKgfFsjwjAhsisbrSiUe89SKYmWtg2vaiEy5qMoqhqbzuNO__PXoKQyH2r2-5nL6hgia7kStvOHXX5ltScsFs-frIpYx-PqNiVEuV04FeozLCrI"/>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">Turnamen Akhir Tahun: Padel Society Cup 2023</p>
+<p class="font-caption text-caption text-secondary mt-1">Oleh Admin</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-md font-caption text-caption">Event</span>
+</td>
+<td class="py-4 px-4">
+<p class="font-body-md text-body-md text-on-surface">20 Nov 2023</p>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-tertiary-container/50 text-on-tertiary-container rounded-full font-caption text-caption font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Scheduled
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="View">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-error hover:bg-error-container/50 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Item 3 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="py-4 px-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary opacity-50">image</span>
+</div>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface group-hover:text-primary transition-colors line-clamp-1">Panduan Memilih Sepatu Padel yang Tepat</p>
+<p class="font-caption text-caption text-secondary mt-1">Oleh Budi Santoso</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-md font-caption text-caption">Tips</span>
+</td>
+<td class="py-4 px-4">
+<p class="font-body-md text-body-md text-secondary italic">-</p>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-surface-variant text-on-surface-variant rounded-full font-caption text-caption font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Draft
+                                    </span>
+</td>
+<td class="py-4 px-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="View">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-primary hover:bg-surface-container-high transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:text-error hover:bg-error-container/50 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="mt-6 flex items-center justify-between border-t border-outline-variant/10 pt-4">
+<p class="font-caption text-caption text-secondary">Menampilkan 1-10 dari 124 artikel</p>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-secondary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-secondary font-label-md text-label-md transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-secondary font-label-md text-label-md transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-secondary">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-secondary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

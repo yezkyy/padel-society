@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daftar Lapangan - Padel Society</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f4f2fd",
+                        "secondary": "#5f5e5e",
+                        "on-primary": "#ffffff",
+                        "on-background": "#1a1b22",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e5e2e1",
+                        "surface": "#fbf8ff",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-container-highest": "#e3e1ec",
+                        "on-primary-container": "#5b7300",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e8e7f1",
+                        "outline": "#747a60",
+                        "surface-tint": "#506600",
+                        "surface-dim": "#dad9e3",
+                        "surface-bright": "#fbf8ff",
+                        "tertiary-fixed": "#e2e2e3",
+                        "inverse-surface": "#2f3038",
+                        "background": "#fbf8ff",
+                        "on-primary-fixed": "#161e00",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "primary": "#506600",
+                        "primary-fixed-dim": "#abd600",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-surface": "#1a1b22",
+                        "on-surface-variant": "#444933",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#ededee",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#c3f400",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#474646",
+                        "inverse-on-surface": "#f1effa",
+                        "surface-variant": "#e3e1ec",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "tertiary": "#5d5e60",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c9ac",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#696b6c",
+                        "on-secondary-container": "#656464",
+                        "inverse-primary": "#abd600",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "surface-container": "#eeedf7",
+                        "primary-container": "#ccff00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit-sm": "8px",
+                        "unit-xl": "64px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "unit-xs": "4px",
+                        "unit-md": "16px",
+                        "unit-lg": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "caption": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .soft-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-4 z-50 flex justify-between items-center px-unit-lg py-unit-sm w-[90%] mx-auto bg-surface/70 backdrop-blur-xl border border-on-surface/5 shadow-xl shadow-on-background/5 rounded-full max-w-[1280px]">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Padel Society</div>
+<nav class="hidden md:flex gap-unit-md items-center">
+<a class="text-secondary hover:text-primary transition-colors hover:scale-[1.02] active:scale-95 duration-200" href="#">Beranda</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 flex-col hover:scale-[1.02] active:scale-95 duration-200 transition-transform" href="#">Lapangan</a>
+<a class="text-secondary hover:text-primary transition-colors hover:scale-[1.02] active:scale-95 duration-200" href="#">Membership</a>
+<a class="text-secondary hover:text-primary transition-colors hover:scale-[1.02] active:scale-95 duration-200" href="#">Event</a>
+<a class="text-secondary hover:text-primary transition-colors hover:scale-[1.02] active:scale-95 duration-200" href="#">Blog</a>
+</nav>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-full hover:-translate-y-0.5 transition-transform hidden md:block">Booking Sekarang</button>
+<button class="md:hidden text-on-surface"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full pt-unit-xl pb-unit-xl flex flex-col gap-unit-xl">
+<!-- Header Section -->
+<section class="flex flex-col gap-unit-sm md:gap-unit-md mt-unit-lg">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">Temukan Lapangan Terbaik</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">Pilih lokasi dan tipe lapangan yang sesuai dengan gaya permainanmu.</p>
+</section>
+<!-- Filters Bar -->
+<section class="glass-panel rounded-full py-unit-sm px-unit-md flex flex-wrap gap-unit-md items-center justify-between sticky top-[90px] z-40 soft-shadow">
+<div class="flex flex-wrap gap-unit-sm items-center w-full md:w-auto">
+<!-- Location Filter -->
+<div class="relative flex-1 md:flex-none min-w-[150px]">
+<select class="w-full appearance-none bg-transparent border-b border-outline-variant hover:border-primary focus:border-primary focus:ring-0 py-2 pl-2 pr-8 font-body-md text-body-md text-on-surface cursor-pointer">
+<option value="">Semua Lokasi</option>
+<option value="jakarta-selatan">Jakarta Selatan</option>
+<option value="bali">Bali</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-secondary pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Type Filter -->
+<div class="relative flex-1 md:flex-none min-w-[150px]">
+<select class="w-full appearance-none bg-transparent border-b border-outline-variant hover:border-primary focus:border-primary focus:ring-0 py-2 pl-2 pr-8 font-body-md text-body-md text-on-surface cursor-pointer">
+<option value="">Semua Tipe</option>
+<option value="indoor">Indoor</option>
+<option value="outdoor">Outdoor</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-secondary pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Date Filter -->
+<div class="relative flex-1 md:flex-none min-w-[150px]">
+<input class="w-full bg-transparent border-b border-outline-variant hover:border-primary focus:border-primary focus:ring-0 py-2 px-2 font-body-md text-body-md text-on-surface cursor-pointer" type="date"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Tampilan Map</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+<!-- Court Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Court Card 1 -->
+<article class="md:col-span-6 lg:col-span-4 glass-panel rounded-3xl overflow-hidden soft-shadow flex flex-col group transition-transform duration-300 hover:-translate-y-1">
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Padel Court Indoor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A modern indoor padel court viewed from a slightly elevated angle. The court has a vibrant blue playing surface with crisp white lines. The walls are transparent glass, supported by a minimalist dark grey steel frame. The lighting is bright and even, highlighting the clean, premium aesthetic typical of elite sports clubs. A faint atmospheric haze gives a sense of depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRgttIJlAOC4lBDLMVhGJbQl1DFPw0S_1xoYk1aVr5mVMyfHxw9XmBlszRTB4JCdLsdZvf9VAccDyCXsB6r3Na_rJBYEcWwJYnywtbxKjU8a7bcSxxqzRP5e4ApclWb1YUdFdu_J3_IJGmGZTC_joLz492fkc9ZwrCbQhJSyauRIlsNbJdUWZVRg75O3o60WxLu3ix7cMkSbNRMQ_H-u7ee1FFkqs_ragPDreenNOIfYoI1hvgRot9-1QULdyf4n6qCJ8r_i56O0A"/>
+<div class="absolute top-4 right-4 bg-primary/10 text-primary px-3 py-1 rounded-full backdrop-blur-md font-label-md text-label-md border border-primary/20">
+                        Tersedia
+                    </div>
+</div>
+<div class="p-unit-lg flex flex-col gap-4 flex-grow">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Senayan Padel Club</h3>
+<span class="font-headline-md text-headline-md text-primary">Rp 450k<span class="text-body-md font-body-md text-secondary">/jam</span></span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-body-md text-body-md">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Jakarta Selatan
+                        </div>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Indoor</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">AC Central</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Cafe</span>
+</div>
+<button class="mt-4 w-full py-4 border border-outline-variant rounded-full text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center">Lihat Detail</button>
+</div>
+</article>
+<!-- Court Card 2 -->
+<article class="md:col-span-6 lg:col-span-4 glass-panel rounded-3xl overflow-hidden soft-shadow flex flex-col group transition-transform duration-300 hover:-translate-y-1">
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Padel Court Outdoor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An outdoor padel court bathed in warm, late afternoon sunlight. The court surface is a rich terracotta red, contrasting with white lines and surrounding lush green tropical foliage. The structural glass and mesh walls cast long, architectural shadows across the playing area. The sky is clear, conveying an energetic, premium lifestyle vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5dIDlzRvdBLXhfjPD26C71QpbjaTF7jrd7NRb7-poeJrnth8QZGOMRQc0xhwBSfHPPKZA8XT7IZzCV-grpqgPJzfMmuIbh6Cdd6P8l61eK1ilONreOiRvz_2V6ekWTiVXsU_nZV3bKLsuurlmbPcf6w3vAOHcJPu1OwKnnPkmDaXOhC6eir8rffrmA3fStwoDoTOXZtVi7YSEYxOJkGJxCIJP9SObq9rAWyvjaBMrwnsCnvEMIvx8kW4BQlG04uQIfWiDliYDNZ4"/>
+<div class="absolute top-4 right-4 bg-surface-container-highest/80 text-secondary px-3 py-1 rounded-full backdrop-blur-md font-label-md text-label-md">
+                        Penuh
+                    </div>
+</div>
+<div class="p-unit-lg flex flex-col gap-4 flex-grow">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Canggu Oasis</h3>
+<span class="font-headline-md text-headline-md text-primary">Rp 350k<span class="text-body-md font-body-md text-secondary">/jam</span></span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-body-md text-body-md">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Bali
+                        </div>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Outdoor</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Pro Shop</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Bar</span>
+</div>
+<button class="mt-4 w-full py-4 border border-outline-variant rounded-full text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center">Lihat Detail</button>
+</div>
+</article>
+<!-- Court Card 3 -->
+<article class="md:col-span-6 lg:col-span-4 glass-panel rounded-3xl overflow-hidden soft-shadow flex flex-col group transition-transform duration-300 hover:-translate-y-1">
+<div class="relative h-64 w-full overflow-hidden">
+<img alt="Padel Court" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A modern padel court viewed from a slightly elevated angle. The court has a vibrant green playing surface with crisp white lines. The walls are transparent glass, supported by a minimalist dark grey steel frame. The lighting is bright and even, highlighting the clean, premium aesthetic typical of elite sports clubs. A faint atmospheric haze gives a sense of depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnof9U44ojomA7Wlydn6tk1o0CboU4HhokNm7zztNUZl-otpy0s-uImAKSo0GlD5o7qR9arJeFWucgcDomqFY0bfDq9qMN8z98l1sEArAXG8GAIO2o79iAulqgP_DABLwKa_4YTYesoN2Ie57Tx0bHsQqJqgCMvutXjt6d5UWiea9Wife05kPFxX1GCf3ToF_ii1Ejm3vn0uyFIo4PXcv-NmgpOLFAno7qpOJSxNWa5XmVlTTqvNO2daV6_a4pYO4d1e3Ji38OHko"/>
+<div class="absolute top-4 right-4 bg-primary/10 text-primary px-3 py-1 rounded-full backdrop-blur-md font-label-md text-label-md border border-primary/20">
+                        Tersedia
+                    </div>
+</div>
+<div class="p-unit-lg flex flex-col gap-4 flex-grow">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Kemang Heights</h3>
+<span class="font-headline-md text-headline-md text-primary">Rp 400k<span class="text-body-md font-body-md text-secondary">/jam</span></span>
+</div>
+<div class="flex items-center gap-1 text-secondary font-body-md text-body-md">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                            Jakarta Selatan
+                        </div>
+</div>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Semi-Indoor</span>
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-caption text-caption border border-outline-variant/30">Lounge</span>
+</div>
+<button class="mt-4 w-full py-4 border border-outline-variant rounded-full text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center">Lihat Detail</button>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface border-t border-outline-variant pt-unit-xl pb-unit-lg w-full">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-md text-headline-md font-bold text-on-surface mb-4">Padel Society</div>
+<p class="font-body-md text-body-md text-secondary">© 2024 Padel Society. All rights reserved.</p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold mb-4">About</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">Our Story</a></li>
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">Careers</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold mb-4">Quick Links</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">Booking</a></li>
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">Locations</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold mb-4">Support</h4>
+<ul class="flex flex-col gap-2">
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">FAQ</a></li>
+<li><a class="font-body-md text-body-md text-secondary-fixed-variant hover:text-primary hover:underline transition-all" href="#">Contact Us</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Padel Society - Court Management</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e3e1ec",
+                        "background": "#fbf8ff",
+                        "surface-container": "#eeedf7",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary-fixed": "#c3f400",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fbf8ff",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "surface-container-low": "#f4f2fd",
+                        "surface-container-high": "#e8e7f1",
+                        "on-surface": "#1a1b22",
+                        "inverse-primary": "#abd600",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-fixed-dim": "#abd600",
+                        "tertiary-fixed": "#e2e2e3",
+                        "tertiary-container": "#ededee",
+                        "on-error-container": "#93000a",
+                        "on-background": "#1a1b22",
+                        "inverse-surface": "#2f3038",
+                        "on-tertiary-container": "#696b6c",
+                        "primary-container": "#ccff00",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dad9e3",
+                        "primary": "#506600",
+                        "secondary-container": "#e5e2e1",
+                        "surface-container-highest": "#e3e1ec",
+                        "outline-variant": "#c4c9ac",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#5b7300",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf8ff",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "outline": "#747a60",
+                        "on-secondary-container": "#656464",
+                        "on-surface-variant": "#444933",
+                        "surface-tint": "#506600",
+                        "tertiary": "#5d5e60",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "on-secondary-fixed-variant": "#474646",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f1effa",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "on-primary-fixed": "#161e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "3xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit-sm": "8px",
+                        "unit-md": "16px",
+                        "unit-lg": "32px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit-xl": "64px",
+                        "margin-mobile": "20px",
+                        "unit-xs": "4px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "caption": ["Inter"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "caption": ["12px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for timeline */
+        .timeline-scroll::-webkit-scrollbar { height: 8px; }
+        .timeline-scroll::-webkit-scrollbar-track { background: transparent; }
+        .timeline-scroll::-webkit-scrollbar-thumb { background: #e3e1ec; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex h-screen overflow-hidden font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: SideNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface h-screen w-64 fixed left-0 top-0 bg-surface/70 backdrop-blur-xl border-r border-outline-variant/10 shadow-[40px_0_40px_rgba(0,0,0,0.04)] z-50 flex flex-col p-unit-md">
+<div class="mb-unit-lg flex items-center gap-3 px-4 py-2">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined">sports_tennis</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed leading-tight text-[18px]">Padel Society</h1>
+<p class="font-caption text-caption text-secondary">Admin Console</p>
+</div>
+</div>
+<ul class="flex-1 space-y-2">
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Bookings</span>
+</a>
+</li>
+<!-- ACTIVE STATE -->
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container bg-primary-container rounded-xl font-bold transition-all active:scale-[0.98] transition-transform duration-200 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_tennis</span>
+<span class="font-label-md text-label-md">Court Management</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed hover:text-primary transition-colors hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-xl active:scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</li>
+</ul>
+<button class="mt-auto w-full bg-primary text-on-primary rounded-xl py-3 font-label-md text-label-md hover:bg-on-primary-container transition-colors shadow-sm active:scale-[0.98]">
+            New Booking
+        </button>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col relative h-full">
+<!-- Shared Component: TopNavBar -->
+<header class="bg-surface/70 dark:bg-inverse-surface/70 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm fixed top-0 right-0 w-[calc(100%-16rem)] z-40 flex justify-between items-center h-16 px-unit-lg text-primary dark:text-primary-fixed font-body-md text-body-md">
+<!-- Search (on_left) -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface transition-all placeholder:text-on-surface-variant/60" placeholder="Search courts, bookings..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Trailing Actions -->
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-70 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary-container rounded-full border border-surface"></span>
+</button>
+<button class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<!-- Profile -->
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/30 cursor-pointer hover:ring-2 hover:ring-primary-container transition-all">
+<img alt="Admin User Profile" class="w-full h-full object-cover" data-alt="Close up professional headshot of a young Indonesian startup employee wearing a clean white t-shirt, neutral studio lighting, high resolution, modern clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEvcqxh7fetMIIfD4KCNjrTEuFyOicmFDJjNHlOMTa6BFZ2TqGxNKqsUDBLkj0hI6HScHqq5XjcdKGar7jj29jBAKQgXEM3frjgbR10dv7NoqUeNnY672BfwKNenBs3x64Pr_TJCgY33f0ma4Vvtr88AGtNiuDLNgyE4zeZ97UHmmUhXfdEQ5NKNQq-60uYB4ZclQQh7Jbp16OW7WAcl1s3XZYFYV4ZEEfRgN2Ea9Vo0gemlq9QeG9DvY4QBtgX0MULbZzK_SdxZk">
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto pt-24 px-margin-desktop pb-margin-desktop space-y-unit-xl">
+<!-- Page Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface tracking-tight">Jadwal &amp; Lapangan</h2>
+<p class="font-body-lg text-body-lg text-secondary mt-2 max-w-xl">Manage real-time court availability, pricing, and maintenance schedules across all facilities.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 rounded-xl border border-outline-variant/50 font-label-md text-label-md text-on-surface flex items-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                        Today, Oct 24
+                    </button>
+</div>
+</section>
+<!-- Interactive Timeline View (Bento/Glassmorphism style) -->
+<section class="bg-surface/50 backdrop-blur-md rounded-3xl border border-surface-container p-unit-lg shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Occupancy Timeline</h3>
+<div class="flex gap-4 font-caption text-caption">
+<div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-surface-container-high border border-outline-variant/30"></div>Available</div>
+<div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-primary/90"></div>Booked</div>
+<div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-tertiary"></div>Maintenance</div>
+</div>
+</div>
+<div class="relative w-full overflow-x-auto timeline-scroll pb-4">
+<div class="min-w-[800px]">
+<!-- Time Headers -->
+<div class="grid grid-cols-12 gap-px bg-surface-container-high rounded-t-xl overflow-hidden mb-2"><div class="p-2 font-label-md text-label-md text-secondary text-center col-span-2 bg-surface">Court</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">07:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">09:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">11:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">13:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">15:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">17:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">19:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">21:00</div><div class="p-2 font-caption text-caption text-secondary text-center bg-surface">23:00</div></div>
+<!-- Rows -->
+<div class="space-y-2">
+<!-- Court 1 -->
+<div class="grid grid-cols-12 gap-1 items-center h-12"><div class="col-span-2 font-label-md text-label-md px-3">Court 1 - Pro</div><div class="col-span-1 h-full bg-primary/90 rounded flex items-center justify-center font-caption text-on-primary shadow-sm" title="Private Booking">P</div><div class="col-span-2 h-full bg-primary/90 rounded flex items-center justify-center font-caption text-on-primary shadow-sm">Private - 2h</div><div class="col-span-1 h-full bg-surface-container-low rounded border border-outline-variant/10"></div><div class="col-span-1 h-full bg-tertiary rounded flex items-center justify-center text-on-tertiary"><span class="material-symbols-outlined text-sm">build</span></div><div class="col-span-3 h-full bg-primary/90 rounded flex items-center justify-center font-caption text-on-primary shadow-sm">Tournament Prep</div><div class="col-span-2 h-full bg-surface-container-low rounded border border-outline-variant/10"></div></div>
+<!-- Court 2 -->
+<div class="grid grid-cols-12 gap-1 items-center h-12">
+<div class="col-span-2 font-label-md text-label-md px-3">Court 2 - Standard</div>
+<div class="col-span-2 h-full bg-primary/90 rounded flex items-center justify-center font-caption text-on-primary shadow-sm">Coaching</div>
+<div class="col-span-4 h-full bg-surface-container-low rounded border border-outline-variant/10 hover:border-primary/50 transition-colors cursor-pointer"></div>
+<div class="col-span-1 h-full bg-primary/90 rounded flex items-center justify-center font-caption text-on-primary shadow-sm">1h</div>
+<div class="col-span-3 h-full bg-surface-container-low rounded border border-outline-variant/10 hover:border-primary/50 transition-colors cursor-pointer"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Court Cards Grid -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface">Detailed Management</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All settings</button>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface rounded-3xl p-unit-lg shadow-sm border border-outline-variant/20 flex flex-col hover:shadow-md transition-shadow"><div class="flex justify-between items-start mb-6"><div class="flex gap-4 items-center"><div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5JWFoRSj2bjWk-TgQV5ML1xGBbkHCwlJPBoM9MTA6cPfm2SwCLzHpbic-cQAbwXt0bPxQrLdC5KOnwrWa7z8HeazNklpX8cRYwns4RZ9GC8AtMcqSBqjR0hhs95989ejGt2lDuwbWK5x95oSvJ4JZE3RO9SqvSHZbsqLdNjkxbrDjxcA6_P9wrnyTrs1ycVnWjLSVB7TdJ89SlYcTfh5GuDd7qVMP_j1HZllIYoCHgxKCedFWWNtHHE4RMIV9f2CH4LXqk87lZF4"></div><div><h4 class="font-headline-md text-headline-md text-on-surface">Court 1 - Pro</h4><div class="flex items-center gap-2 mt-1"><span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-md text-xs">Available</span><span class="font-caption text-caption text-secondary">• Indoor • Glass Back</span></div></div></div><span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">more_vert</span></div><div class="space-y-4 flex-1"><div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low"><div><p class="font-label-md text-label-md text-on-surface">Maintenance Mode</p><p class="font-caption text-caption text-secondary">Instantly block all public bookings</p></div><label class="relative inline-flex items-center cursor-pointer"><input class="sr-only peer" type="checkbox"><div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div></label></div><div class="grid grid-cols-2 gap-3"><div class="p-3 rounded-xl bg-surface-container-low space-y-1"><label class="font-caption text-caption text-primary">Peak Rate</label><div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-on-surface-variant">Rp</span><input class="w-full bg-surface border border-outline-variant/20 rounded-lg py-1.5 pl-7 pr-2 font-label-md text-on-surface focus:ring-2 focus:ring-primary text-right" type="text" value="350.000"></div></div><div class="p-3 rounded-xl bg-surface-container-low space-y-1"><label class="font-caption text-caption text-secondary">Off-Peak</label><div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-on-surface-variant">Rp</span><input class="w-full bg-surface border border-outline-variant/20 rounded-lg py-1.5 pl-7 pr-2 font-label-md text-on-surface focus:ring-2 focus:ring-primary text-right" type="text" value="280.000"></div></div></div><button class="w-full mt-2 py-2.5 border border-primary/30 text-primary font-label-md text-label-md rounded-xl hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[18px]">event_note</span>View Full Schedule</button></div></div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-3xl p-unit-lg shadow-sm border border-outline-variant/20 flex flex-col hover:shadow-md transition-shadow"><div class="flex justify-between items-start mb-6"><div class="flex gap-4 items-center"><div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm"><img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRtFU7qp50enJxtqxcpn-rZVqoO3yzZOGfMevnyeiBtiDh9yN7eaif7j6VlYk2kFoabkNccoHFyx5SaX2ZLs5zucC6VDSmiVKFF7kcnEUIyuk6uMLoe-jhzWygEAaYYI83wjXrb-E01wt1mX2Ylo9g-_h-9kTwIf9EPT-McLfXeeB5T5VoT8lfK8L9yEQTo-SyL0JgqOo9aZv03WQ3ilLB4Lzwy_eC90OzkxBNEKDaAGWtuiDX9qwRv3_PaFJU3dmQrRIcOlJr0pU"></div><div><h4 class="font-headline-md text-headline-md text-on-surface">Court 2 - Standard</h4><div class="flex items-center gap-2 mt-1"><span class="inline-flex items-center px-2 py-0.5 rounded-full bg-tertiary text-on-tertiary font-label-md text-xs">Maintenance</span><span class="font-caption text-caption text-secondary">• Outdoor • Turf</span></div></div></div><span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">more_vert</span></div><div class="space-y-4 flex-1"><div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low"><div><p class="font-label-md text-label-md text-on-surface">Maintenance Mode</p><p class="font-caption text-caption text-secondary">Currently active for cleaning</p></div><label class="relative inline-flex items-center cursor-pointer"><input checked="" class="sr-only peer" type="checkbox"><div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div></label></div><div class="grid grid-cols-2 gap-3"><div class="p-3 rounded-xl bg-surface-container-low space-y-1"><label class="font-caption text-caption text-secondary">Peak Rate</label><div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-on-surface-variant">Rp</span><input class="w-full bg-surface border border-outline-variant/20 rounded-lg py-1.5 pl-7 pr-2 font-label-md text-on-surface focus:ring-2 focus:ring-primary text-right" type="text" value="300.000"></div></div><div class="p-3 rounded-xl bg-surface-container-low space-y-1"><label class="font-caption text-caption text-primary">Off-Peak</label><div class="relative"><span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-on-surface-variant">Rp</span><input class="w-full bg-surface border border-outline-variant/20 rounded-lg py-1.5 pl-7 pr-2 font-label-md text-on-surface focus:ring-2 focus:ring-primary text-right" type="text" value="250.000"></div></div></div><button class="w-full mt-2 py-2.5 border border-primary/30 text-primary font-label-md text-label-md rounded-xl hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[18px]">event_note</span>View Full Schedule</button></div></div>
+</div>
+</section>
+</div>
+</main>
+
+
+</body></html>
