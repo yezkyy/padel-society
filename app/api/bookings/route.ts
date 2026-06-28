@@ -126,6 +126,52 @@ export async function POST(request: NextRequest) {
     const bookingId = `bk-${Math.random().toString(36).substr(2, 9)}`;
     const paymentId = `pay-${Math.random().toString(36).substr(2, 9)}`;
 
+    // Call Midtrans Sandbox Snap API
+    const serverKey = process.env.MIDTRANS_SERVER_KEY;
+    let snapToken: string | null = null;
+    let snapRedirectUrl: string | null = null;
+
+    if (serverKey) {
+      try {
+        const authHeader = `Basic ${Buffer.from(serverKey + ":").toString("base64")}`;
+        const midtransResponse = await fetch("https://app.sandbox.midtrans.com/snap/v1/transactions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": authHeader,
+          },
+          body: JSON.stringify({
+            transaction_details: {
+              order_id: bookingId,
+              gross_amount: totalPrice,
+            },
+            credit_card: {
+              secure: true,
+            },
+            customer_details: {
+              first_name: session.user.name,
+              email: session.user.email,
+            },
+            expiry: {
+              unit: "minutes",
+              duration: 15,
+            },
+          }),
+        });
+
+        const midtransData = await midtransResponse.json();
+        if (midtransData.token) {
+          snapToken = midtransData.token;
+          snapRedirectUrl = midtransData.redirect_url;
+        } else {
+          console.error("Midtrans transaction creation failed:", midtransData);
+        }
+      } catch (e) {
+        console.error("Error creating Midtrans transaction:", e);
+      }
+    }
+
     await db.transaction(async (tx) => {
       await tx.insert(bookings).values({
         id: bookingId,
@@ -146,6 +192,8 @@ export async function POST(request: NextRequest) {
         amount: totalPrice,
         status: "UNPAID",
         expiryTime,
+        externalId: snapToken,
+        paymentMethod: snapToken ? "MIDTRANS" : null,
       });
     });
 
@@ -153,8 +201,47 @@ export async function POST(request: NextRequest) {
       bookingId,
       totalPrice,
       expiryMinutes: 15,
+      snapToken,
+      snapRedirectUrl,
     });
   } catch (error: any) {
     return apiError(error.message || "Failed to create booking", 500);
+  }
+}
+
+export async function GET(request: NextRequest) {
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  if (!session) {
+    return apiError("Unauthorized", 401);
+  }
+
+  const { searchParams } = new URL(request.url);
+  const bookingId = searchParams.get("bookingId");
+
+  if (!bookingId) {
+    return apiError("Missing bookingId", 400);
+  }
+
+  try {
+    const bookingList = await db
+      .select({
+        id: bookings.id,
+        status: bookings.status,
+        totalPrice: bookings.totalPrice,
+      })
+      .from(bookings)
+      .where(and(eq(bookings.id, bookingId), eq(bookings.userId, session.user.id)));
+
+    const bookingObj = bookingList[0];
+    if (!bookingObj) {
+      return apiError("Booking tidak ditemukan", 404);
+    }
+
+    return apiSuccess("Status booking ditemukan", bookingObj);
+  } catch (error: any) {
+    return apiError(error.message || "Gagal mengambil status booking", 500);
   }
 }

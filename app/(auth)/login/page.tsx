@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Loader2, Mail, Lock, User, Phone, ArrowRight } from "lucide-react";
+import { Loader2, Mail, Lock, User, Phone, ArrowRight, ArrowLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -407,6 +407,17 @@ function AuthTabs() {
 
   return (
     <div className="space-y-6">
+      {/* Back to Home Button */}
+      <div className="text-left">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-[11px] font-bold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors uppercase tracking-wider font-sans group"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
+          <span>Kembali ke Beranda</span>
+        </Link>
+      </div>
+
       {/* Header */}
       <div className="space-y-2 text-center">
         <h1 className="font-heading text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 transition-all duration-300">

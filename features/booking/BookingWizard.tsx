@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
 import { CustomDatePicker } from "@/components/ui/custom-date-picker";
 import { cn } from "@/lib/utils";
+import Script from "next/script";
 
 interface Court {
   id: string;
@@ -79,10 +80,13 @@ export function BookingWizard({ courts, initialCourtId }: BookingWizardProps) {
 
   // Checkout API call state
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCheckingStatus, setIsCheckingStatus] = useState(false);
   const [bookingResult, setBookingResult] = useState<{
     bookingId: string;
     totalPrice: number;
     expiryMinutes: number;
+    snapToken?: string | null;
+    snapRedirectUrl?: string | null;
   } | null>(null);
 
   // Countdown timer state
@@ -219,6 +223,65 @@ export function BookingWizard({ courts, initialCourtId }: BookingWizardProps) {
       toast.error("Pembayaran dibatalkan atau gagal.");
       setStep(1);
       setBookingResult(null);
+    }
+  };
+
+  const handlePayWithMidtrans = () => {
+    if (!bookingResult) return;
+    
+    const snapToken = bookingResult.snapToken;
+    const snapRedirectUrl = bookingResult.snapRedirectUrl;
+
+    if (!snapToken) {
+      if (snapRedirectUrl) {
+        window.open(snapRedirectUrl, "_blank");
+      } else {
+        toast.error("Token pembayaran Midtrans tidak ditemukan.");
+      }
+      return;
+    }
+
+    if ((window as any).snap) {
+      (window as any).snap.pay(snapToken, {
+        onSuccess: function (result: any) {
+          toast.success("Pembayaran berhasil dikonfirmasi!");
+          router.push("/member/bookings");
+        },
+        onPending: function (result: any) {
+          toast.info("Pembayaran Anda sedang diproses.");
+        },
+        onError: function (result: any) {
+          toast.error("Pembayaran gagal. Silakan coba lagi.");
+        },
+        onClose: function () {
+          toast.warning("Anda menutup popup pembayaran sebelum selesai.");
+        },
+      });
+    } else {
+      if (snapRedirectUrl) {
+        window.open(snapRedirectUrl, "_blank");
+      } else {
+        toast.error("Metode pembayaran sedang memuat, silakan coba sesaat lagi.");
+      }
+    }
+  };
+
+  const handleCheckPaymentStatus = async () => {
+    if (!bookingResult) return;
+    setIsCheckingStatus(true);
+    try {
+      const res = await fetch(`/api/bookings?bookingId=${bookingResult.bookingId}`);
+      const data = await res.json();
+      if (data.success && data.data.status === "CONFIRMED") {
+        toast.success("Pembayaran terkonfirmasi oleh sistem!");
+        router.push("/member/bookings");
+      } else {
+        toast.error("Pembayaran belum terkonfirmasi oleh sistem kami.");
+      }
+    } catch (e) {
+      toast.error("Gagal memeriksa status pembayaran.");
+    } finally {
+      setIsCheckingStatus(false);
     }
   };
 
@@ -473,7 +536,8 @@ export function BookingWizard({ courts, initialCourtId }: BookingWizardProps) {
 
         {/* Step 3 Content: Payment */}
         {step === 3 && bookingResult && (
-          <div className="space-y-8">
+          <div className="space-y-8 animate-fade-in">
+            {/* Countdown timer */}
             <div className="bg-rose-50 border border-rose-100 dark:bg-rose-950/20 dark:border-rose-950/50 rounded-3xl p-6 text-center space-y-3">
               <span className="text-rose-600 dark:text-rose-400 text-xs font-bold uppercase tracking-wider block">
                 Selesaikan Pembayaran Sebelum Waktu Habis
@@ -486,33 +550,80 @@ export function BookingWizard({ courts, initialCourtId }: BookingWizardProps) {
               </div>
             </div>
 
+            {/* Midtrans Snap Button Box */}
             <div className="bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-3xl p-8 space-y-6">
               <h3 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-50 flex items-center gap-2">
                 <CreditCard className="w-5 h-5 text-zinc-400" />
-                Metode Pembayaran (Midtrans Snap Simulator)
+                Selesaikan Pembayaran
               </h3>
-              <p className="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed">
-                Silakan simulasikan proses webhook pembayaran dari payment gateway di bawah ini:
+              
+              <div className="p-4 bg-zinc-50 dark:bg-zinc-800/30 rounded-2xl border border-black/[0.03] dark:border-white/[0.03] space-y-2.5 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">ID Booking:</span>
+                  <span className="font-bold text-zinc-900 dark:text-zinc-100">{bookingResult.bookingId}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400">Total Harga:</span>
+                  <span className="font-bold text-[#ccff00]">
+                    Rp {bookingResult.totalPrice.toLocaleString("id-ID")}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <Button
+                  onClick={handlePayWithMidtrans}
+                  className="w-full bg-[#ccff00] hover:bg-[#b5e000] text-black font-bold rounded-2xl py-6 h-auto text-sm shadow-lg shadow-[#ccff00]/10 hover:shadow-xl hover:shadow-[#ccff00]/25 transition-all duration-300"
+                >
+                  Bayar Sekarang (Midtrans Snap)
+                </Button>
+
+                <Button
+                  onClick={handleCheckPaymentStatus}
+                  disabled={isCheckingStatus}
+                  variant="outline"
+                  className="w-full border-zinc-200 dark:border-zinc-800 rounded-2xl py-5 h-auto text-xs font-semibold"
+                >
+                  {isCheckingStatus ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      Memeriksa Status...
+                    </>
+                  ) : (
+                    "Cek Konfirmasi Pembayaran"
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            {/* Sandbox Developer Mock Simulator */}
+            <div className="bg-zinc-50/50 dark:bg-zinc-900/30 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">
+                  Simulasi Sandbox (Developer Mode)
+                </h4>
+                <span className="px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-[9px] font-bold text-zinc-500 uppercase tracking-wider">
+                  Local Mock
+                </span>
+              </div>
+              <p className="text-[11px] text-zinc-400 leading-relaxed">
+                Gunakan tombol simulasi di bawah ini untuk memperbarui status booking secara instan tanpa menyelesaikan pembayaran Midtrans asli:
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Button
                   onClick={() => handleSimulatePayment(true)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-2xl py-6 h-auto flex flex-col items-center justify-center gap-1 shadow-lg shadow-emerald-600/10"
+                  variant="ghost"
+                  className="hover:bg-emerald-50 dark:hover:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 rounded-xl py-3 text-xs"
                 >
-                  <span className="text-sm font-bold">Simulasi Bayar Sukses</span>
-                  <span className="text-[10px] text-emerald-100 font-normal">
-                    Mengonfirmasi status lunas
-                  </span>
+                  Bayar Sukses (Mock)
                 </Button>
                 <Button
                   onClick={() => handleSimulatePayment(false)}
-                  className="bg-rose-600 hover:bg-rose-500 text-white font-semibold rounded-2xl py-6 h-auto flex flex-col items-center justify-center gap-1 shadow-lg shadow-rose-600/10"
+                  variant="ghost"
+                  className="hover:bg-rose-50 dark:hover:bg-rose-950/20 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-900/30 rounded-xl py-3 text-xs"
                 >
-                  <span className="text-sm font-bold">Simulasi Bayar Gagal / Batal</span>
-                  <span className="text-[10px] text-rose-100 font-normal">
-                    Membatalkan booking & melepas slot
-                  </span>
+                  Batal / Gagal (Mock)
                 </Button>
               </div>
             </div>
@@ -605,6 +716,13 @@ export function BookingWizard({ courts, initialCourtId }: BookingWizardProps) {
           </div>
         </div>
       </div>
+
+      {/* Midtrans Snap JS Script */}
+      <Script
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+        strategy="lazyOnload"
+      />
     </div>
   );
 }
