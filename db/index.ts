@@ -10,9 +10,15 @@ if (!connectionString && process.env.NODE_ENV === "production") {
 
 const dbUrl = connectionString || "postgresql://postgres:postgres@localhost:5432/padelsociety";
 
+export const isDatabaseConfigured = Boolean(
+  process.env.DATABASE_URL &&
+    (process.env.NODE_ENV !== "production" || !process.env.DATABASE_URL.includes("localhost"))
+);
+
 const pool = new Pool({
   connectionString: dbUrl,
-  max: 20,
+  max: 10,
+  connectionTimeoutMillis: 1500, // Fail fast if no database is reachable
 });
 
 export const db = drizzle(pool, { schema });

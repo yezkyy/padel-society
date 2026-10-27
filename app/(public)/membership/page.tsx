@@ -5,38 +5,18 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, ShieldCheck } from "lucide-react";
 import MembershipGrid from "@/components/membership/MembershipGrid";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { MOCK_MEMBERSHIP_PLANS, isDatabaseConfigured } from "@/lib/mock-data";
 
 export const revalidate = 3600;
 
 export default async function MembershipPage() {
-  let plans = [];
-  try {
-    plans = await db.select().from(membershipPlans);
-  } catch (error) {
-    console.error("Failed to query plans, fallback to mocks:", error);
-    plans = [
-      {
-        id: "plan-starter",
-        name: "Starter Pack",
-        description: "Cocok untuk pemula yang ingin mencoba padel secara santai.",
-        price: 150000,
-        durationDays: 30,
-        benefits: ["Diskon booking 10%", "Prioritas booking slot H-3"],
-      },
-      {
-        id: "plan-elite",
-        name: "Elite Pro",
-        description: "Untuk pemain setia dengan prioritas dan diskon maksimal.",
-        price: 500000,
-        durationDays: 30,
-        benefits: [
-          "Diskon booking 20%",
-          "Prioritas booking slot H-7",
-          "Akses ke event eksklusif",
-          "Gratis sewa raket 2x/bulan",
-        ],
-      },
-    ];
+  let plans: any[] = MOCK_MEMBERSHIP_PLANS;
+  if (isDatabaseConfigured) {
+    try {
+      plans = await db.select().from(membershipPlans);
+    } catch (error) {
+      console.error("Failed to query plans, fallback to mocks:", error);
+    }
   }
 
   return (

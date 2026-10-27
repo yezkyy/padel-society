@@ -6,39 +6,18 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Users } from "lucide-react";
 import EventGrid from "@/components/events/EventGrid";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { MOCK_EVENTS, isDatabaseConfigured } from "@/lib/mock-data";
 
 export const revalidate = 3600;
 
 export default async function EventPage() {
-  let eventList = [];
-  try {
-    eventList = await db.select().from(events);
-  } catch (error) {
-    console.error("Failed to query events, fallback to mocks:", error);
-    eventList = [
-      {
-        id: "event-1",
-        title: "Padel Society Open Tournament 2024",
-        description: "Turnamen padel tahunan terbesar di Jakarta. Tunjukkan kemampuan terbaik tim Anda dan menangkan total hadiah Rp 25.000.000.",
-        location: "Senayan Club Indoor",
-        date: new Date("2024-11-15T09:00:00"),
-        quota: 32,
-        registrationFee: 250000,
-        imageUrl: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=400&auto=format&fit=crop",
-        status: "UPCOMING",
-      },
-      {
-        id: "event-2",
-        title: "Weekend Social Coaching Clinic",
-        description: "Pelatihan khusus bagi pemula yang dibimbing langsung oleh pelatih internasional berlisensi. Dapatkan tips dasar dan teknik memukul padel yang benar.",
-        location: "Senayan Club Outdoor",
-        date: new Date("2024-11-02T16:00:00"),
-        quota: 16,
-        registrationFee: 100000,
-        imageUrl: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=400&auto=format&fit=crop",
-        status: "UPCOMING",
-      },
-    ];
+  let eventList: any[] = MOCK_EVENTS;
+  if (isDatabaseConfigured) {
+    try {
+      eventList = await db.select().from(events);
+    } catch (error) {
+      console.error("Failed to query events, fallback to mocks:", error);
+    }
   }
 
   return (

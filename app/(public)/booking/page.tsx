@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { courts } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { BookingWizard } from "@/features/booking/BookingWizard";
+import { MOCK_COURTS, isDatabaseConfigured } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
@@ -15,37 +16,16 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
   const resolvedParams = await searchParams;
   const courtId = resolvedParams.courtId;
 
-  let activeCourts = [];
-  try {
-    activeCourts = await db
-      .select()
-      .from(courts)
-      .where(eq(courts.status, "ACTIVE"));
-  } catch (error) {
-    console.error("Failed to query active courts, using fallback mocks:", error);
-    activeCourts = [
-      {
-        id: "court-1",
-        name: "Court 1 (Indoor)",
-        description: "Lapangan indoor premium dengan pencahayaan LED standar turnamen.",
-        pricePerHour: 200000,
-        status: "ACTIVE",
-      },
-      {
-        id: "court-2",
-        name: "Court 2 (Indoor)",
-        description: "Lapangan indoor premium dengan ventilasi optimal.",
-        pricePerHour: 200000,
-        status: "ACTIVE",
-      },
-      {
-        id: "court-3",
-        name: "Court 3 (Outdoor)",
-        description: "Lapangan outdoor dengan pemandangan terbuka, cocok untuk sore hari.",
-        pricePerHour: 150000,
-        status: "ACTIVE",
-      },
-    ];
+  let activeCourts: any[] = MOCK_COURTS.filter((c) => c.status === "ACTIVE");
+  if (isDatabaseConfigured) {
+    try {
+      activeCourts = await db
+        .select()
+        .from(courts)
+        .where(eq(courts.status, "ACTIVE"));
+    } catch (error) {
+      console.error("Failed to query active courts, using fallback mocks:", error);
+    }
   }
 
   return (

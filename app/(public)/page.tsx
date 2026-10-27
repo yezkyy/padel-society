@@ -20,38 +20,22 @@ import {
   Shield,
 } from "lucide-react";
 
+import { MOCK_COURTS, isDatabaseConfigured } from "@/lib/mock-data";
+
 export const revalidate = 3600; // Cache for 1 hour
 
 export default async function LandingPage() {
-  // Fetch active courts dynamically from database
-  let activeCourts = [];
-  try {
-    activeCourts = await db
-      .select()
-      .from(courts)
-      .where(eq(courts.status, "ACTIVE"));
-  } catch (error) {
-    console.error("Failed to fetch courts, fallback to static mock:", error);
-    activeCourts = [
-      {
-        id: "court-1",
-        name: "Court 1 (Indoor)",
-        description: "Lapangan indoor premium dengan pencahayaan LED standar turnamen.",
-        pricePerHour: 200000,
-      },
-      {
-        id: "court-2",
-        name: "Court 2 (Indoor)",
-        description: "Lapangan indoor premium dengan ventilasi optimal.",
-        pricePerHour: 200000,
-      },
-      {
-        id: "court-3",
-        name: "Court 3 (Outdoor)",
-        description: "Lapangan outdoor dengan pemandangan terbuka, cocok untuk sore hari.",
-        pricePerHour: 150000,
-      },
-    ];
+  // Fetch active courts dynamically from database if configured, or use mock data
+  let activeCourts: any[] = MOCK_COURTS.filter((c) => c.status === "ACTIVE");
+  if (isDatabaseConfigured) {
+    try {
+      activeCourts = await db
+        .select()
+        .from(courts)
+        .where(eq(courts.status, "ACTIVE"));
+    } catch (error) {
+      console.error("Failed to fetch courts, fallback to static mock:", error);
+    }
   }
 
   const whyUs = [

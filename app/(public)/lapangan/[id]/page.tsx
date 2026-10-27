@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import { MapPin, Trophy, Users, Shield, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
+import { MOCK_COURTS, isDatabaseConfigured } from "@/lib/mock-data";
 
 export const revalidate = 3600;
 
@@ -18,40 +19,19 @@ interface DetailCourtPageProps {
 export default async function DetailCourtPage({ params }: DetailCourtPageProps) {
   const { id } = await params;
 
-  let court = null;
-  try {
-    const list = await db.select().from(courts).where(eq(courts.id, id));
-    court = list[0] || null;
-  } catch (error) {
-    console.error("Database query failed, trying mock fallback:", error);
+  let court: any = null;
+  if (isDatabaseConfigured) {
+    try {
+      const list = await db.select().from(courts).where(eq(courts.id, id));
+      court = list[0] || null;
+    } catch (error) {
+      console.error("Database query failed, trying mock fallback:", error);
+    }
   }
 
   // Fallback mocks
   if (!court) {
-    const fallbackMocks: Record<string, any> = {
-      "court-1": {
-        id: "court-1",
-        name: "Court 1 (Indoor)",
-        description:
-          "Lapangan indoor premium dengan pencahayaan LED standar turnamen dan karpet profesional. Memberikan kenyamanan bermain maksimal tanpa terganggu cuaca luar ruangan. Dilengkapi AC sentral dan area duduk eksklusif.",
-        pricePerHour: 200000,
-      },
-      "court-2": {
-        id: "court-2",
-        name: "Court 2 (Indoor)",
-        description:
-          "Lapangan indoor premium dengan ventilasi optimal dan karpet profesional. Didesain dengan langit-langit yang tinggi memberikan fleksibilitas penuh untuk pukulan lob Anda.",
-        pricePerHour: 200000,
-      },
-      "court-3": {
-        id: "court-3",
-        name: "Court 3 (Outdoor)",
-        description:
-          "Lapangan outdoor premium di kelilingi lanskap hijau yang menyegarkan. Sempurna untuk bermain di sore dan malam hari dengan sistem lampu sorot LED tanpa silau.",
-        pricePerHour: 150000,
-      },
-    };
-    court = fallbackMocks[id];
+    court = MOCK_COURTS.find((c) => c.id === id) || null;
   }
 
   if (!court) {

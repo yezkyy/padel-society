@@ -4,11 +4,29 @@ import { bookings, courts, payments, promoCodes, user, memberships, websiteSetti
 import { eq, and, gte, lte, or, lt, gt } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { apiSuccess, apiError } from "@/lib/api-response";
+import { isDatabaseConfigured } from "@/lib/mock-data";
 
 export async function POST(request: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: request.headers,
-  });
+  if (!isDatabaseConfigured) {
+    // Demo mode: Return successful simulated booking for preview without database
+    const bookingId = `demo-bk-${Math.random().toString(36).substr(2, 6)}`;
+    return apiSuccess("Booking berhasil dibuat (Demo Mode)", {
+      bookingId,
+      totalPrice: 200000,
+      expiryMinutes: 15,
+      snapToken: null,
+      snapRedirectUrl: null,
+    });
+  }
+
+  let session = null;
+  try {
+    session = await auth.api.getSession({
+      headers: request.headers,
+    });
+  } catch (e) {
+    console.warn("Session check failed:", e);
+  }
 
   if (!session) {
     return apiError("Unauthorized", 401);
@@ -210,19 +228,32 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const session = await auth.api.getSession({
-    headers: request.headers,
-  });
-
-  if (!session) {
-    return apiError("Unauthorized", 401);
-  }
-
   const { searchParams } = new URL(request.url);
   const bookingId = searchParams.get("bookingId");
 
   if (!bookingId) {
     return apiError("Missing bookingId", 400);
+  }
+
+  if (!isDatabaseConfigured) {
+    return apiSuccess("Status booking ditemukan (Demo)", {
+      id: bookingId,
+      status: "PENDING",
+      totalPrice: 200000,
+    });
+  }
+
+  let session = null;
+  try {
+    session = await auth.api.getSession({
+      headers: request.headers,
+    });
+  } catch (e) {
+    console.warn("Session check failed in GET booking:", e);
+  }
+
+  if (!session) {
+    return apiError("Unauthorized", 401);
   }
 
   try {

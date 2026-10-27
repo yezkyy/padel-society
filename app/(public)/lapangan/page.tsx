@@ -6,6 +6,7 @@ import { eq, and, like } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import { CourtFilters } from "@/components/courts/CourtFilters";
 import { MapPin } from "lucide-react";
+import { MOCK_COURTS, isDatabaseConfigured } from "@/lib/mock-data";
 
 export const dynamic = "force-dynamic";
 
@@ -35,51 +36,35 @@ export default async function LapanganPage({ searchParams }: LapanganPageProps) 
     queryLocation = "Bali";
   }
 
-  let courtList = [];
-  try {
-    courtList = await db
-      .select()
-      .from(courts)
-      .where(and(...conditions));
+  let courtList: any[] = [];
+  if (isDatabaseConfigured) {
+    try {
+      courtList = await db
+        .select()
+        .from(courts)
+        .where(and(...conditions));
 
-    // Post-filter location mock text
-    if (queryLocation) {
-      courtList = courtList.filter(
-        (c) =>
-          c.description?.includes(queryLocation) ||
-          c.name.includes(queryLocation) ||
-          (queryLocation === "Jakarta Selatan" && c.id.includes("court-1")) ||
-          (queryLocation === "Jakarta Selatan" && c.id.includes("court-2"))
-      );
+      // Post-filter location mock text
+      if (queryLocation) {
+        courtList = courtList.filter(
+          (c) =>
+            c.description?.includes(queryLocation) ||
+            c.name.includes(queryLocation) ||
+            (queryLocation === "Jakarta Selatan" && c.id.includes("court-1")) ||
+            (queryLocation === "Jakarta Selatan" && c.id.includes("court-2"))
+        );
+      }
+    } catch (error) {
+      console.error("Failed to query courts, fallback to mock data:", error);
     }
-  } catch (error) {
-    console.error("Failed to query courts, fallback to mock data:", error);
-    courtList = [
-      {
-        id: "court-1",
-        name: "Court 1 (Indoor)",
-        description: "Lapangan indoor premium dengan pencahayaan LED standar turnamen dan karpet profesional. Lokasi Jakarta Selatan.",
-        pricePerHour: 200000,
-        status: "ACTIVE",
-      },
-      {
-        id: "court-2",
-        name: "Court 2 (Indoor)",
-        description: "Lapangan indoor premium dengan ventilasi optimal dan karpet profesional. Lokasi Jakarta Selatan.",
-        pricePerHour: 200000,
-        status: "ACTIVE",
-      },
-      {
-        id: "court-3",
-        name: "Court 3 (Outdoor)",
-        description: "Lapangan outdoor dengan pemandangan terbuka, cocok untuk sore hari. Lokasi Bali.",
-        pricePerHour: 150000,
-        status: "ACTIVE",
-      },
-    ].filter(
+  }
+
+  if (courtList.length === 0) {
+    courtList = MOCK_COURTS.filter(
       (c) =>
+        c.status === "ACTIVE" &&
         (!type || c.name.toLowerCase().includes(type.toLowerCase())) &&
-        (!queryLocation || c.description.includes(queryLocation))
+        (!queryLocation || c.description.includes(queryLocation) || c.location?.includes(queryLocation))
     );
   }
 
